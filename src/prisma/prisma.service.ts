@@ -13,4 +13,14 @@ export class PrismaService
   async onModuleDestroy() {
     await this.$disconnect();
   }
+
+  // src/prisma/prisma.service.ts
+
+  async cleanDatabase() {
+    if (process.env.NODE_ENV === 'test') {
+      await this.user.deleteMany();
+      await this.workout.deleteMany();
+      await this.exercise.deleteMany();
+    }
+  }
 }
